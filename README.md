@@ -2,12 +2,12 @@
 virtio 9p "mapped" mode requires extended attributes to be set. Documentation doesn't exist.
 
 Set up a shared dir in virt-manager using:
-  type=mount
-  driver=path
-  mode=mapped
-  write=immediate
-  source=/tank/fakesharename
-  target=9pshare
+-  type=mount
+-  driver=path
+-  mode=mapped
+-  write=immediate
+-  source=/tank/fakesharename
+-  target=9pshare
 
 or from the cli with `/usr/bin/qemu-system-x86_64 \[...\] -fsdev local,security_model=mapped,writeout=immediate,id=fsdev-fs0,path=/tank/fakesharename -device virtio-9p-pci,id=fs0,fsdev=fsdev-fs0,mount_tag=9pshare,bus=pci.0,addr=0x7 `
 
