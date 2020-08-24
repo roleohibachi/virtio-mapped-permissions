@@ -23,4 +23,12 @@ or from the cli with `/usr/bin/qemu-system-x86_64 \[...\] -fsdev local,security_
 
 Those will set the guest perms to www-data, or root, or something. Doesn't matter; as long as they are set to something-god-please-anything, you'll be able to change them from inside the guest.
 
+Oh and by the way, you'll need to mount the 9p filesystem inside the guest, it isn't automatic like with vmware etc.
+
+`mount -t 9p -o trans=virtio,version=9p2000.L 9pshare /mnt/whatever`
+
+or
+
+`echo "9pshare  /mnt/whatever  9p  trans=virtio,version=9p2000.L  0  0" >> /etc/fstab && mount -a`
+
 Honestly, I might consider this behavior a bug. Others would consider it a security feature. Go tell it on the mailing list.
