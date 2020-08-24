@@ -17,9 +17,9 @@ or from the cli with `/usr/bin/qemu-system-x86_64 \[...\] -fsdev local,security_
 
 `mapped` mode then stores the guest's perceived file attributes in the host file's *extended attributes*. If those attributes are unset on a file (i.e. if you populated this directory from the host rather than from inside the guest) then the guest won't know what to do with the files. To fix this:
 
-find /tank/fakesharename -type d -exec sh -c " setfattr -n user.virtfs.gid -v 0sIQAAAA== \"\$@\"; setfattr -n user.virtfs.mode -v 0s7UEAAA== \"\$@\"; setfattr -n user.virtfs.uid -v 0sIQAAAA== \"\$@\"; " _ {} \;
+`find /tank/fakesharename -type d -exec sh -c " setfattr -n user.virtfs.gid -v 0sIQAAAA== \"\$@\"; setfattr -n user.virtfs.mode -v 0s7UEAAA== \"\$@\"; setfattr -n user.virtfs.uid -v 0sIQAAAA== \"\$@\"; " _ {} \;`
 
-find /tank/fakesharename -type f -exec sh -c " setfattr -n user.virtfs.gid -v 0sIQAAAA==  \"\$@\"; setfattr -n user.virtfs.mode -v 0spIEAAA== \"\$@\"; setfattr -n user.virtfs.uid -v 0sIQAAAA== \"\$@\"; " _ {} \;
+`find /tank/fakesharename -type f -exec sh -c " setfattr -n user.virtfs.gid -v 0sIQAAAA==  \"\$@\"; setfattr -n user.virtfs.mode -v 0spIEAAA== \"\$@\"; setfattr -n user.virtfs.uid -v 0sIQAAAA== \"\$@\"; " _ {} \;`
 
 Those will set the guest perms to www-data, or root, or something. Doesn't matter; as long as they are set to something-god-please-anything, you'll be able to change them from inside the guest.
 
